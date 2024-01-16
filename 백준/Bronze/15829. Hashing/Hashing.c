@@ -4,17 +4,18 @@
 #include <string.h>
 
 int main(void) {
-	int L, r = 31, M = 1234567891, res = 0;
+	int L, r = 31, M = 1234567891;
+	long long res = 0;
 	char str[51];
-	int i, j;
+	int i;
 	scanf("%d %s", &L, str);
+	if (L > 50) return 0;
+	long long tmp = 1;
 	for (i = 0; i < L; i++) {
-		int tmp = 1;
-		for (j = 0; j < i; j++) tmp *= r;
-		res += (str[i] - 96) * tmp;
+		res += ((str[i] - 96) * tmp) % M;
+		tmp = (tmp *31) % M;
 	}
-	int mod = res / M;
-	if (mod > 0) res -= M * mod;
-	printf("%d\n", res);
+	res %= M;
+	printf("%lld\n", res);
 	return 0;
 }
